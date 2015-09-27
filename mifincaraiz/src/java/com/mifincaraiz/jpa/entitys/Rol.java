@@ -1,0 +1,119 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.mifincaraiz.jpa.entitys;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ *
+ * @author andresM
+ */
+@Entity
+@Table(name = "rol")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
+    @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol"),
+    @NamedQuery(name = "Rol.findByTipoRol", query = "SELECT r FROM Rol r WHERE r.tipoRol = :tipoRol")})
+public class Rol implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
+    @Column(name = "id_rol")
+    private String idRol;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 13)
+    @Column(name = "tipo_rol")
+    private String tipoRol;
+     @ManyToMany(mappedBy = "rolList")
+//    @JoinTable(name = "usuario_has_rol", joinColumns = {
+//        @JoinColumn(name = "rol_id_rol", referencedColumnName = "id_rol")}, inverseJoinColumns = {
+//        @JoinColumn(name = "usuario_id_usuario", referencedColumnName = "id_usuario")})
+//    @ManyToMany
+    private List<Usuario> usuarioList;
+
+    public Rol() {
+    }
+
+    public Rol(String idRol) {
+        this.idRol = idRol;
+    }
+
+    public Rol(String idRol, String tipoRol) {
+        this.idRol = idRol;
+        this.tipoRol = tipoRol;
+    }
+
+    public String getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(String idRol) {
+        this.idRol = idRol;
+    }
+
+    public String getTipoRol() {
+        return tipoRol;
+    }
+
+    public void setTipoRol(String tipoRol) {
+        this.tipoRol = tipoRol;
+    }
+
+    @XmlTransient
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
+    }
+
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idRol != null ? idRol.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Rol)) {
+            return false;
+        }
+        Rol other = (Rol) object;
+        if ((this.idRol == null && other.idRol != null) || (this.idRol != null && !this.idRol.equals(other.idRol))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return tipoRol;
+    }
+    
+}

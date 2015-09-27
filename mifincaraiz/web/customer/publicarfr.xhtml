@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+           
+            <h:panelGrid columns="1">
+                <label value="#{bundle.LabeltransaccionVivienda}" jsf:for="transaccionVivienda" />
+                <h:selectManyCheckbox id="transaccionVivienda" value="#{viviendaController.listaTransaccionVivienda}" layout="grid" 
+                                              pt:required="true" 
+                                              converter="transaccionConverter"
+                                              requiredMessage="Requerido">  
+                    <f:selectItems value="#{viviendaController.listtransaccionViviendaSelctOne}"/>
+                            <f:ajax execute="@this" render="transaccionViviendaMessage"/>
+                        </h:selectManyCheckbox> 
+                        <p:message id="rolMessage" for="transaccionVivienda"/>
+                <label value="#{bundle.CreateViviendaLabelTipoVivienda}" jsf:for="idTipoVivienda" />
+                        <h:selectOneMenu id="idTipoVivienda" pt:required="true"
+                                         value="#{viviendaController.viviendaActual.tipoViviendaIdTipoVivienda}" 
+                                         title="#{bundle.CreateViviendaTitleTipoVivienda}" required="true" 
+                                         requiredMessage="#{bundle.CreateViviendaRequiredMessage_idTipoVivienda}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+                            <f:selectItems value="#{viviendaController.listTipoViviendaSelectOne}"/>
+                        </h:selectOneMenu>
+                        <p:message id="idTipoViviendaMessage" for="idTipoVivienda"/>
+                
+                <label value="#{bundle.CreateViviendacantidadHabitaciones}" jsf:for="cantidadHabitaciones" />
+                <input type="text" jsf:id="cantidadHabitaciones" 
+                       jsf:value="#{viviendaController.viviendaActual.cantidadHabitaciones}" 
+                       title="#{bundle.CreateViviendaTitle_cantidadHabitaciones}" 
+                       maxlength="5" 
+                       jsf:validatorMessage="#{bundle.ValidarMensajeTelefono}">
+                    <f:validateRegex pattern="[0-9]*"/>
+                    <f:ajax execute="@this" render="cantidadHabitacionesMessage"/>
+                </input>
+                <p:message id="cantidadHabitacionesMessage" for="cantidadHabitaciones"/>
+                
+                <label value="#{bundle.CreateViviendaprecioVivienda}" jsf:for="precioVivienda" />
+                <input type="text" jsf:id="precioVivienda" 
+                       jsf:value="#{viviendaController.viviendaActual.precioVivienda}" 
+                       title="#{bundle.CreateViviendaTitle_precioVivienda}" 
+                       maxlength="14" required="true"
+                       jsf:requiredMessage="#{bundle.RequeridMensajePrecioVivienda}"
+                       jsf:validatorMessage="#{bundle.ValidarMensajeTelefono}">
+                    <f:validateRegex pattern="[0-9]*"/>
+                    <f:ajax execute="@this" render="precioViviendaMessage"/>
+                </input>
+                <p:message id="precioViviendaMessage" for="precioVivienda"/>
+                
+                <label value="#{bundle.CreateViviendaCantidadBanos}" jsf:for="cantidadBanos"/>
+                <input type="text" jsf:id="cantidadBanos"
+                       jsf:value="#{viviendaController.viviendaActual.cantidadBanos}"
+                       title="#{bundle.CreateViviendaTitle_cantidadBanos}"
+                       maxlength="5"
+                       jsf:validatorMessage="#{bundle.ValidarMensajeTelefono}">
+                    <f:validateRegex pattern="[0-9]*"/>
+                    <f:ajax execute="@this" render="cantidadBanosMessage"/>
+                </input>
+                <p:message id="cantidadBanosMessage" for="cantidadBanos"/>
+                
+                <label value="#{bundle.CreateViviendaCantidadPisos}" jsf:for="cantidadPisos"/>
+                <input type="text" jsf:id="cantidadPisos"
+                       jsf:value="#{viviendaController.viviendaActual.cantidadPisos}"
+                       title="#{bundle.CreateViviendaTitle_cantidadPisos}"
+                       maxlength="45"
+                       jsf:validatorMessage="#{bundle.ValidarMensajeTelefono}">
+                    <f:validateRegex pattern="[0-9]*"/>
+                    <f:ajax execute="@this" render="cantidadPisosMessage"/>
+                </input>
+                <p:message id="cantidadPisosMessage" for="cantidadPisos"/>
+                
+                <label value="#{bundle.CreateViviendaLabelBarrio}" jsf:for="barrio"/>
+                <input type="text" jsf:id="barrio"
+                       jsf:value="#{viviendaController.viviendaActual.barrio}"
+                       title="#{bundle.CreateViviendaTitle_barrio}"
+                       required="true" maxlength="45"
+                       jsf:validatorMessage="#{bundle.CreateEditUsuarioValidatorMessage_Nombre1}">
+                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="barrioMessage"/>
+                </input>
+                <p:message id="barrioMessage" for="barrio"/>
+                
+                <label value="#{bundle.CreateViviendaLabelCorregimiento}" jsf:for="corregimiento"/>
+                <input type="text" jsf:id="corregimiento"
+                       jsf:value="#{viviendaController.viviendaActual.corregimiento}"
+                       title="#{bundle.CreateViviendaTitle_corregimiento}"
+                       maxlength="45"
+                       jsf:validatorMessage="#{bundle.CreateEditUsuarioValidatorMessage_Nombre1}">
+                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="corregimientoMessage"/>
+                </input>
+                <p:message id="corregimientoMessage" for="corregimiento"/>
+                
+                <label value="#{bundle.CreateViviendaLabelDireccion}" jsf:for="direccionVivienda"/>
+                <input type="text" jsf:id="direccionVivienda"
+                       jsf:value="#{viviendaController.viviendaActual.direccionVivienda}"
+                       title="#{bundle.CreateViviendaTitle_direccionVivienda}"
+                       required="true" maxlength="45"
+                       jsf:validatorMessage="#{bundle.CreateViviendavalidatorMessageDireccionVivienda}">
+                    <f:validateRegex pattern="[0-9 a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="direccionViviendaMessage"/>
+                </input>
+                <p:message id="direccionViviendaMessage" for="direccionVivienda"/>
+                
+                <label value="#{bundle.CreateViviendaLabelDescripcion}" jsf:for="descripcion"/>
+                <textarea rows="12" cols="30" jsf:id="descripcion"
+                          jsf:value="#{viviendaController.viviendaActual.descripcion}"
+                       title="#{bundle.CreateViviendaTitle_descripcion}"
+                       required="true" maxlength="245"
+                       jsf:validatorMessage="#{bundle.CreateViviendaValidatorMessageDescripcion}">
+                    <f:validateRegex pattern="[0-9 a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="descripcionMessage"/>
+                </textarea>
+                <p:message id="descripcionMessage" for="descripcion"/>
+                
+                
+                
+                <label value="#{bundle.CreateViviendaLabel_ciudad}" jsf:for="ciudad" />
+                <p:autoComplete id="ciudad" value="#{viviendaController.viviendaActual.ciudad}" 
+                                required="true" requiredMessage="#{bundle.CreateViviendaRequiredMessage_ciudad}"
+                                completeMethod="#{viviendaController.getListaCiudadesAutoComplete}" 
+                                var="ciudad" itemLabel="#{ciudad}" itemValue="#{ciudad}" 
+                                converter="ciudadConverter" pt:required="true"
+                                forceSelection="true" maxResults="10"/> 
+                <p:message id="ciudadMessage" for="ciudad"/>
+                
+                <h:commandButton value="Publicar" actionListener="#{viviendaController.publicar}" class="Form-botonCrear">
+                 <f:attribute name="userLoguiado" value="#{loginController.userLogueado}" />
+                </h:commandButton>
+         </h:panelGrid>   
+        </h:form>
+        
+
+
+    </h:body>
+</html>
+

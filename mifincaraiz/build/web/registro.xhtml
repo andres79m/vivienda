@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+
+
+        <h:form>
+            <h1><h:outputText value="Create/Edit"/></h1>
+            <h:panelGrid columns="1">
+                <label value="#{bundle.CreateUsuarioNombre1}" jsf:for="nombre1" />
+                <input type="text" jsf:id="nombre1" 
+                       jsf:value="#{usuarioController.usuarioActual.nombre1}" 
+                       title="#{bundle.CreateUsuarioTitle_Nombre1}" 
+                       required="true" maxlength="45" 
+                       jsf:requiredMessage="#{bundle.CreateUsuarioRequiredMessage_Nombre1}"
+                       jsf:validatorMessage="#{bundle.CreateEditUsuarioValidatorMessage_Nombre1}">
+                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="nombre1Message"/>
+                </input>
+                <p:message id="nombre1Message" for="nombre1"/>
+                <label value="#{bundle.CreateUsuarioNombre2}" jsf:for="nombre2" />
+                <input type="text" jsf:id="nombre2" 
+                       jsf:value="#{usuarioController.usuarioActual.nombre2}" 
+                       title="#{bundle.CreateUsuarioTitle_Nombre2}" 
+                       maxlength="45" 
+                       jsf:validatorMessage="#{bundle.CreateEditUsuarioValidatorMessage_Nombre2}">
+                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="nombre2Message"/>
+                </input>
+                <p:message id="nombre2Message" for="nombre2"/>
+                <label value="#{bundle.CreateUsuarioApellido1}" jsf:for="apellido1" />
+                <input type="text" jsf:id="apellido1" 
+                       jsf:value="#{usuarioController.usuarioActual.apellido1}" 
+                       title="#{bundle.CreateUsuarioTitle_apellido1}" 
+                       required="true" maxlength="45" 
+                       jsf:requiredMessage="#{bundle.RequiredMensajeApellido1}"
+                       jsf:validatorMessage="#{bundle.ValidarMensajeApellido1}">
+                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="apellido1Message"/>
+                </input>
+                <p:message id="apellido1Message" for="apellido1"/>
+                <label value="#{bundle.CreateUsuarioApellido2}" jsf:for="apellido2" />
+                <input type="text" jsf:id="apellido2" 
+                       jsf:value="#{usuarioController.usuarioActual.apellido2}" 
+                       title="#{bundle.CreateUsuarioTitle_apellido2}" 
+                       maxlength="45" 
+                       jsf:validatorMessage="#{bundle.ValidarMensajeApellido2}">
+                    <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                    <f:ajax execute="@this" render="apellido2Message"/>
+                </input>
+                <p:message id="apellido2Message" for="apellido2"/>
+                <label value="#{bundle.FechaDeNacimiento}" jsf:for="fechaNacimiento" />
+                <input type="date" jsf:id="fechaNacimiento" 
+                       jsf:value="#{usuarioController.usuarioActual.fechaNacimiento}" 
+                       title="#{bundle.CreateUsuarioTitle_fechaDeNacimiento}" 
+                       jsf:validator="#{usuarioController.validarEdad}"
+                       required="true" 
+                       jsf:requiredMessage="#{bundle.RequiredMensajeFecha}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                    <f:ajax execute="@this" render="fechaNacimientoMessage"/>
+                </input>
+                <h:message id="fechaNacimientoMessage" for="fechaNacimiento"/>
+                <label value="#{bundle.Email_label}" jsf:for="email" />
+                <input type="email" jsf:id="email"
+                       jsf:value="#{usuarioController.usuarioActual.email}" 
+                       title="#{bundle.CreateUsuarioTitle_email}"
+                       jsf:requiredMessage="#{bundle.RequiredMessage_email}">
+
+                    <f:ajax execute="@this" render="emailMessage"/>
+                </input>
+                <p:message id="emailMessage" for="email"/>
+                <label value="#{bundle.CreateUsuarioLabel_telefono1}" jsf:for="telefono1" />
+                        <input type="tel" jsf:id="telefono1" 
+                               jsf:value="#{usuarioController.usuarioActual.telefono1}" 
+                               title="#{bundle.CreateUsuarioTitle_telefono1}" 
+                               required="true" 
+                               jsf:requiredMessage="#{bundle.CreateUsuarioRequiredMessage_telefono1}"
+                            jsf:validatorMessage="#{bundle.ValidarMensajeTelefono}">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <f:ajax execute="@this" render="telefono1Message"/>
+                        </input>
+                        <p:message id="telefono1Message" for="telefono1"/>
+
+
+                        <label value="#{bundle.CreateUsuarioLabel_telefono2}" jsf:for="telefono2" />
+                        <input type="tel" jsf:id="telefono2" 
+                               jsf:value="#{usuarioController.usuarioActual.telefono2}" 
+                               title="#{bundle.CreateUsuarioTitle_telefono2}"
+                               validatorMessage="#{bundle.ValidarMensajeTelefono}">
+                            <f:validateRegex pattern="[0-9]*"/>
+                            <f:ajax execute="@this" render="telefono2Message"/>
+                        </input>
+                        <p:message id="telefono2Message" for="telefono2"/>
+                <label value="#{bundle.CreateUsuarioLabel_password}" jsf:for="password " />
+                <p:password  id="password" validatorMessage="Las contraseñas no son iguales."
+                             value="#{usuarioController.usuarioActual.password}" 
+                             title="#{bundle.CreateUsuarioTitle_password}" 
+                             match="pwd2"  pt:required="true"  
+                             requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}">
+                    <f:ajax execute="@this" render="passwordMessage password2Message"/>
+                </p:password>
+
+                <p:message id="passwordMessage" for="password"/>
+
+
+                <h:outputLabel for="pwd2" value="Repetir contraseña: *" />
+                <p:password id="pwd2" value="#{usuarioController.usuarioActual.password}" label="Password 2" 
+                            pt:required="true"
+                            requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}">
+                    <f:ajax execute="@this password" render="passwordMessage password2Message"/>
+                </p:password>
+                <p:message id="password2Message" for="pwd2"/>
+            </h:panelGrid>
+            <input type="submit" jsf:action="#{usuarioController.addUsuario}"  value="Guardar" class="Guardar-botton"> 
+            </input>
+        </h:form>
+
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{usuarioController.listaUsuarios}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdUsuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idUsuario}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre1"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre1}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre2"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre2}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido1"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellido1}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido2"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellido2}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="FechaNacimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Email"/>
+                        </f:facet>
+                        <h:outputText value="#{item.email}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Telefono1"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telefono1}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Telefono2"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telefono2}"/>
+                    </h:column>
+                    <!-- <h:column>
+                         <f:facet name="header">
+                             <h:outputText value="FechaRegistro"/>
+                         </f:facet>
+                         <h:outputText value="#{item.fechaRegistro}">
+                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                         </h:outputText>
+                     </h:column>-->
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="EstadoUsuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.estadoUsuario}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="password"/>
+                        </f:facet>
+                        <h:outputText value="#{item.password}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
